@@ -1,0 +1,9 @@
+---
+- name: Install basic cli apps on arch
+  package: 
+    name: "{{ item }}" 
+    state: present
+  with_items:
+    - "{{ common_apps }}"
+  when: "common_apps"
+

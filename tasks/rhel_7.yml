@@ -1,0 +1,17 @@
+---
+- name: Remove requested applications on rhel
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ common_apps_remove }}"
+  when: common_apps_remove is defined
+
+
+- name: Install common_apps on rhel
+  yum: 
+    name: "{{ item }}" 
+    state: present
+    update_cache: yes
+  with_items: "{{ common_apps }}"
+  when: common_apps is defined
+

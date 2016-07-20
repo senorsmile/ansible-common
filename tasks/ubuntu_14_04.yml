@@ -1,0 +1,22 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400 #24 hours
+
+- name: Remove requested applications on ubuntu
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ common_apps_remove }}"
+
+- name: Install common_apps on ubuntu
+  apt: 
+    name: "{{ item }}" 
+    state: present
+  with_items:
+    - "{{ common_apps }}"
+
+
+

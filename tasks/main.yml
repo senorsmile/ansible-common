@@ -1,0 +1,22 @@
+---
+- block:
+    - name: If host running arch or derivative
+      include: arch.yml
+      when: 
+        ansible_pkg_mgr == 'pacman'
+
+    - name: If host running ubuntu
+      include: ubuntu_14_04.yml
+      when: 
+        ansible_distribution == 'Ubuntu' 
+        and 
+        ansible_distribution_release == 'trusty' #14.04
+
+    - name: If host running rhel 7 (or deriv)
+      include: rhel_7.yml
+      when: 
+        ansible_os_family == 'RedHat' 
+        and 
+        ansible_distribution_major_version == '7'
+
+  tags: common
